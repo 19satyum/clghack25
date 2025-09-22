@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID Document Upload</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for file input */
+        .file-input-container {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .file-input {
+            position: absolute;
+            font-size: 100px;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file-input-label {
+            cursor: pointer;
+        }
+        /* Spinner animation */
+        .spinner {
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border-left-color: #ffffff;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 flex items-center justify-center min-h-screen">
+
+    <div id="upload-card" class="bg-white w-full max-w-md p-8 rounded-2xl shadow-lg transition-all duration-500">
+        <!-- Card Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-slate-800">Upload Your ID</h1>
+            <p class="text-slate-500 mt-2">Please select one document type to verify your identity.</p>
+        </div>
+
+        <!-- Form -->
+        <form id="upload-form" class="space-y-6">
+            <!-- ID Type Selection -->
+            <div>
+                <label for="id-type" class="block text-sm font-medium text-slate-700 mb-1">Select Document Type</label>
+                <select id="id-type" name="id-type" class="block w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                    <option value="" disabled selected>Choose one...</option>
+                    <option value="Aadhar Card">Aadhar Card</option>
+                    <option value="PAN Card">PAN Card</option>
+                    <option value="Voter ID Card">Voter ID Card</option>
+                    <option value="Driving Licence">Driving Licence</option>
+                    <option value="Passport">Passport</option>
+                </select>
+            </div>
+
+            <!-- File Upload Area -->
+            <div id="file-upload-area" class="opacity-50 pointer-events-none transition-opacity duration-300">
+                <label class="block text-sm font-medium text-slate-700 mb-1">Upload File</label>
+                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-md">
+                    <div class="space-y-1 text-center">
+                        <!-- SVG Icon -->
+                        <svg class="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <div class="flex text-sm text-slate-600">
+                            <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                <span>Select a file</span>
+                                <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                            </label>
+                            <p class="pl-1">or drag and drop</p>
+                        </div>
+                        <p class="text-xs text-slate-500" id="file-info">PNG, JPG, PDF up to 10MB</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Upload Button -->
+            <div>
+                <button type="submit" id="upload-button" disabled class="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-300 disabled:cursor-not-allowed transition-all">
+                    <span id="button-text">Upload Document</span>
+                    <div id="spinner" class="spinner hidden"></div>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Success Message Card -->
+    <div id="success-card" class="bg-white w-full max-w-md p-8 rounded-2xl shadow-lg text-center hidden">
+        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+            <!-- Heroicons - Check -->
+            <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+        </div>
+        <h2 id="success-title" class="text-2xl font-bold text-slate-800 mt-5">Upload Successful!</h2>
+        <p id="success-message" class="text-slate-500 mt-2">Your document has been uploaded.</p>
+        <button id="reset-button" class="mt-8 w-full py-3 px-4 rounded-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Upload Another
+        </button>
+    </div>
+
+<script>
+    // Get all necessary DOM elements
+    const idTypeSelect = document.getElementById('id-type');
+    const fileUploadArea = document.getElementById('file-upload-area');
+    const fileInput = document.getElementById('file-upload');
+    const fileInfo = document.getElementById('file-info');
+    const uploadButton = document.getElementById('upload-button');
+    const buttonText = document.getElementById('button-text');
+    const spinner = document.getElementById('spinner');
+    const uploadForm = document.getElementById('upload-form');
+    
+    // Success state elements
+    const uploadCard = document.getElementById('upload-card');
+    const successCard = document.getElementById('success-card');
+    const successTitle = document.getElementById('success-title');
+    const successMessage = document.getElementById('success-message');
+    const resetButton = document.getElementById('reset-button');
+
+    let selectedFile = null;
+
+    // --- Event Listeners ---
+
+    // 1. Enable file upload area when an ID type is selected
+    idTypeSelect.addEventListener('change', () => {
+        if (idTypeSelect.value) {
+            fileUploadArea.classList.remove('opacity-50', 'pointer-events-none');
+        } else {
+            fileUploadArea.classList.add('opacity-50', 'pointer-events-none');
+        }
+        validateForm();
+    });
+
+    // 2. Handle file selection
+    fileInput.addEventListener('change', (event) => {
+        selectedFile = event.target.files[0];
+        if (selectedFile) {
+            // Display file name and size
+            const fileSize = (selectedFile.size / 1024 / 1024).toFixed(2); // in MB
+            fileInfo.textContent = `${selectedFile.name} (${fileSize} MB)`;
+            fileInfo.classList.add('text-indigo-600', 'font-semibold');
+        } else {
+            resetFileInfo();
+        }
+        validateForm();
+    });
+
+    // 3. Handle form submission (upload)
+    uploadForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent default form submission
+        if (isFormValid()) {
+            simulateUpload();
+        }
+    });
+
+    // 4. Handle reset button click
+    resetButton.addEventListener('click', () => {
+        // Hide success card and show upload card
+        successCard.classList.add('hidden');
+        uploadCard.classList.remove('hidden');
+
+        // Reset the form state
+        uploadForm.reset();
+        selectedFile = null;
+        resetFileInfo();
+        fileUploadArea.classList.add('opacity-50', 'pointer-events-none');
+        uploadButton.disabled = true;
+        uploadButton.classList.remove('bg-green-600');
+        buttonText.textContent = 'Upload Document';
+    });
+
+    // --- Helper Functions ---
+
+    // Function to check if form is valid for submission
+    const isFormValid = () => {
+        return idTypeSelect.value && selectedFile;
+    };
+
+    // Function to enable/disable the upload button based on form validity
+    const validateForm = () => {
+        if (isFormValid()) {
+            uploadButton.disabled = false;
+        } else {
+            uploadButton.disabled = true;
+        }
+    };
+
+    // Function to reset the file info text
+    const resetFileInfo = () => {
+        fileInfo.textContent = 'PNG, JPG, PDF up to 10MB';
+        fileInfo.classList.remove('text-indigo-600', 'font-semibold');
+    };
+
+    // Function to simulate the upload process
+    const simulateUpload = () => {
+        // Show loading state on the button
+        buttonText.textContent = 'Uploading...';
+        spinner.classList.remove('hidden');
+        uploadButton.disabled = true;
+        idTypeSelect.disabled = true;
+        fileInput.disabled = true;
+
+        // Simulate a network request delay
+        setTimeout(() => {
+            // Hide loading state
+            spinner.classList.add('hidden');
+            idTypeSelect.disabled = false;
+            fileInput.disabled = false;
+
+            // Show success state
+            showSuccessScreen();
+            
+        }, 2000); // 2-second delay
+    };
+    
+    // Function to display the success card
+    const showSuccessScreen = () => {
+        const docType = idTypeSelect.options[idTypeSelect.selectedIndex].text;
+        
+        uploadCard.classList.add('hidden');
+        successCard.classList.remove('hidden');
+        
+        successTitle.textContent = `${docType} Uploaded!`;
+        successMessage.textContent = `Your file "${selectedFile.name}" has been successfully submitted for verification.`;
+    };
+
+</script>
+
+</body>
+</html>
