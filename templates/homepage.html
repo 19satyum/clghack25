@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authify - The Official Identity Standard for Social Media</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .modal-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal-content {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600">Authify</a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
+                <a href="#report-hub" class="text-gray-600 hover:text-blue-600 transition duration-300">Report</a>
+                <a href="#how-it-works" class="text-gray-600 hover:text-blue-600 transition duration-300">How It Works</a>
+                <a href="#features" class="text-gray-600 hover:text-blue-600 transition duration-300">Features</a>
+                <a href="#" class="bg-blue-600 text-white font-bold py-2 px-5 rounded-lg hover:bg-blue-700 transition duration-300">Sign In</a>
+            </nav>
+            <button class="md:hidden" id="mobile-menu-button">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+             <a href="#home" class="block py-2 text-gray-600 hover:text-blue-600">Home</a>
+             <a href="#report-hub" class="block py-2 text-gray-600 hover:text-blue-600">Report</a>
+             <a href="#how-it-works" class="block py-2 text-gray-600 hover:text-blue-600">How It Works</a>
+             <a href="#features" class="block py-2 text-gray-600 hover:text-blue-600">Features</a>
+             <a href="#" class="block mt-2 text-center bg-blue-600 text-white font-bold py-2 px-5 rounded-lg hover:bg-blue-700 transition duration-300">Sign In</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-gradient py-20 md:py-28 text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4 leading-tight">The Official Identity Standard for Social Media</h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">Authify is your one-stop solution for authentication. Get verified once and prove you're the real you across all our partnered platforms.</p>
+                <button id="verifyBtn" class="bg-blue-600 text-white font-bold py-4 px-8 rounded-lg text-lg hover:bg-blue-700 transition duration-300 shadow-lg transform hover:scale-105">Verify Yourself Now</button>
+                
+                <div class="mt-16">
+                    <p class="text-gray-600 font-medium mb-6">A single verification for all your favorite platforms</p>
+                    <div class="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
+                        <!-- Icons for social media partners -->
+                        <div class="flex items-center gap-2 text-gray-500 hover:text-black transition-colors">
+                            <svg class="w-8 h-8" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.784.305-1.457.718-2.123 1.385C1.35 2.68.937 3.353.63 4.14.333 4.905.132 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.26 2.148.558 2.913.305.784.718 1.457 1.385 2.123.667.666 1.34 1.078 2.123 1.383.766.298 1.636.498 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.26 2.913-.558.784-.305 1.457-.718 2.123-1.383.666-.667 1.078-1.34 1.383-2.123.298-.765.498-1.636.558-2.913C23.988 15.667 24 15.26 24 12s-.015-3.667-.072-4.947c-.06-1.277-.26-2.148-.558-2.913-.305-.784-.718-1.457-1.383-2.123C21.32.936 20.647.523 19.86.22c-.765-.298-1.636-.498-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.06 1.17-.249 1.805-.413 2.227-.217.562-.477.96-.896 1.381-.42.419-.82.679-1.38.896-.423.164-1.057.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.585-.015-4.85-.074c-1.17-.06-1.805-.249-2.227-.413-.562-.217-.96-.477-1.381-.896-.419-.42-.679-.82-.896-1.38.165-.423-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.015-3.585.07-4.85c.06-1.17.249-1.805.413-2.227.217-.562.477-.96.896-1.381.42-.419.819-.679 1.381-.896.422-.164 1.057-.36 2.227-.413C8.415 2.175 8.797 2.16 12 2.16zm0 9.04c-1.933 0-3.5 1.567-3.5 3.5s1.567 3.5 3.5 3.5 3.5-1.567 3.5-3.5-1.567-3.5-3.5-3.5zm0 5.18c-1.21 0-2.18-1.045-2.18-2.28s.97-2.28 2.18-2.28 2.18 1.045 2.18 2.28-.97 2.28-2.18 2.28zm4.965-7.85c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z" fill="currentColor"/></svg>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-500 hover:text-black transition-colors">
+                             <svg class="w-8 h-8" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Snapchat</title><path d="M23.882 18.022a2.333 2.333 0 01-1.664.683 2.336 2.336 0 01-1.636-.653l-3.23-3.23c-.347.058-.67.087-1.03.087-1.117 0-2.146-.347-3.118-1.03-.493.522-1.044 1.13-1.664 1.75l-1.918 1.83c-.986.986-2.26 1.48-3.532 1.48-1.274 0-2.546-.494-3.533-1.48L.12 14.937a.348.348 0 010-.493L2.24 12.33c.116-.116.32-.116.435 0l1.246 1.246c.93.93 2.145 1.395 3.36 1.395 1.217 0 2.432-.465 3.36-1.395l.435-.435c.116-.116.116-.32 0-.435l-.87-.87c-.116-.116-.32-.116-.435 0l-.52.52c-.406.406-1.044.58-1.578.435-.9-.26-1.45-1.16-1.217-2.06.203-.812.9-1.395 1.722-1.395.405 0 .81.145 1.13.435l.897.897c.116.116.32.116.435 0l.435-.435c.116-.116.116-.32 0-.435l-.87-.87c-.116-.116-.32-.116-.435 0l-.52.52c-.406.406-1.044.58-1.578.435-.9-.26-1.45-1.16-1.217-2.06.203-.812.9-1.395 1.722-1.395.405 0 .81.145 1.13.435l2.06 2.06c.116.116.32.116.435 0l.435-.435c.116-.116.116-.32 0-.435l-.87-.87c-.116-.116-.32-.116-.435 0l-.52.52c-.406.406-1.044.58-1.578.435-.9-.26-1.45-1.16-1.217-2.06C8.83 2.22 9.527 1.64 10.35 1.64c.406 0 .81.145 1.13.435l4.636 4.636c.116.116.32.116.435 0l.435-.435c.116-.116.116-.32 0-.435l-2.6-2.607C13.29.145 12.075-.32 10.86.3c-1.015.52-1.55 1.665-1.245 2.75.29 1.044 1.246 1.75 2.347 1.75.522 0 1.017-.174 1.45-.52l2.173-2.175c.116-.116.32-.116.435 0l.435.435c.116.116.116-.028 0 .087l-2.23 2.23c-1.103 1.102-1.103 2.898 0 4l.435.435c.116.116.32.116.435 0l.435-.435c1.102-1.102 1.102-2.898 0-4l-.87-.87c-.116-.116-.03-.32.086-.32.117 0 .204.03.29.116l4.29 4.29c.957.957 2.23 1.45 3.504 1.45.03 0 .058 0 .087 0 .116 0 .203-.03.29-.116l.87-.87c.116-.116.03-.32-.087-.32-.116 0-.203.03-.29.116l-.52.52c-.957.957-2.23 1.45-3.504 1.45-1.273 0-2.547-.493-3.504-1.45l-4.29-4.29c-1.102-1.102-2.898-1.102-4 0l-1.303 1.304-.754-.754.956-.957c.957-.957 1.45-2.23 1.45-3.504 0-.03 0-.058 0-.087 0-.116.03-.203.116-.29l.87-.87c.116-.116.32-.03.32.086 0 .117-.03.204-.116.29l-.52.52c-.957.957-1.45 2.23-1.45 3.504 0 1.274.493 2.547 1.45 3.504l4.29 4.29c.116.116.116.32 0 .435z" fill="currentColor"/></svg>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-500 hover:text-black transition-colors">
+                            <svg class="w-8 h-8" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Telegram</title><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.17.91-.494 1.208-.822 1.23-.696.04-1.22-.46-1.864-.902-1.056-.72-1.656-1.17-2.67-1.848-.945-.624-.33-1.002.21-1.59.09-.09.16-.18.23-.26.87-1.02 1.74-2.05 2.61-3.07.22-.25.43-.53.06-.8-.43-.32-1.03-.22-1.53-.22-.52 0-1.08.06-1.74.22-1.25.31-2.2.62-2.87.82-.75.23-1.37.35-1.9.33-.5-.02-1.02-.15-1.4-.49-.43-.37-.56-1.03-.48-1.58.18-1.16.92-2.2 1.6-3.15.67-.92 1.45-1.72 2.75-2.52 1.25-.78 2.6-.9 3.9-.3 1.15.5 1.83 1.4 2.1 2.55.05.22.08.41.08.57a.5.5 0 0 1-.01.07z" fill="currentColor"/></svg>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-500 hover:text-black transition-colors">
+                            <svg class="w-8 h-8" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Discord</title><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.885-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4464.8245-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1619-.425-.3973-.8742-.6083-1.2495a.0741.0741 0 0 0-.0785-.0371 19.7913 19.7913 0 0 0-4.885 1.5152.069.069 0 0 0-.0321.0233c-1.933 3.2282-3.1238 6.9468-3.4687 10.7484a.0741.0741 0 0 0 .029.0593c2.8152 1.9365 5.5827 3.2905 8.2818 3.8658a.0741.0741 0 0 0 .0825-.0233c.4654-.63.875-1.2933 1.2278-1.9942a.0741.0741 0 0 0-.041-.1063c-.63-.2652-1.2278-.5537-1.7915-.8651a.0741.0741 0 0 1-.0233-.094c.0321-.0611.0611-.1222.0882-.1863a.0741.0741 0 0 1 .094-.0321c3.5414 1.5847 7.2882 1.5847 10.7937 0a.0741.0741 0 0 1 .094.0321c.027.0641.0561.1252.0882.1863a.0741.0741 0 0 1-.0233.094c-.5637.3114-1.1615.6-1.7915.8651a.0741.0741 0 0 0-.041.1063c.3528.701.7624 1.3642 1.2278 1.9942a.0741.0741 0 0 0 .0825.0233c2.6991-.5753 5.4666-1.9293 8.2818-3.8658a.0741.0741 0 0 0 .029-.0593c-.345-3.8016-1.5358-7.5202-3.4687-10.7484a.069.069 0 0 0-.0321-.0233zM8.02 15.3312c-.7854 0-1.422-1.0256-1.422-2.2848s.6366-2.2848 1.422-2.2848c.7853 0 1.422 1.0256 1.422 2.2848s-.6366 2.2848-1.422 2.2848zm7.9548 0c-.7854 0-1.422-1.0256-1.422-2.2848s.6366-2.2848 1.422-2.2848c.7854 0 1.422 1.0256 1.422 2.2848.0001 1.2592-.6366 2.2848-1.422 2.2848z" fill="currentColor"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report Hub Section -->
+        <section id="report-hub" class="py-20 bg-white">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Worried About a Fake Account?</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-12">Identify and report suspicious activity with our impersonation check tools.</p>
+                
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6 max-w-4xl mx-auto">
+                    <!-- Card 1: I'm being impersonated -->
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg w-full md:w-1/2 text-left transform hover:scale-105 transition-transform duration-300 border border-gray-200">
+                        <svg class="w-12 h-12 text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <h2 class="text-2xl font-bold mb-3">I think I'm being impersonated.</h2>
+                        <p class="text-gray-600 mb-6">Use our tool to find fake profiles using your name and alert your trusted contacts.</p>
+                        <button id="impersonatedBtn" class="w-full bg-red-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-600 transition duration-300">Start My Check</button>
+                    </div>
+
+                    <!-- Card 2: I received a suspicious message -->
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg w-full md:w-1/2 text-left transform hover:scale-105 transition-transform duration-300 border border-gray-200">
+                        <svg class="w-12 h-12 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                        <h2 class="text-2xl font-bold mb-3">I received a suspicious message.</h2>
+                        <p class="text-gray-600 mb-6">Quickly verify if the profile contacting you is real or a scammer trying to exploit you.</p>
+                        <button id="suspiciousBtn" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Verify a Profile</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold">A Simple, 3-Step Process</h2>
+                    <p class="text-lg text-gray-600 mt-2">Designed for speed and ease of use.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-12 text-center">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center">
+                        <div class="bg-blue-100 text-blue-600 rounded-full p-6 mb-6">
+                           <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">1. Submit a Report</h3>
+                        <p class="text-gray-600">Provide the suspicious profile link through our simple, intuitive form. It takes less than a minute.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center">
+                        <div class="bg-blue-100 text-blue-600 rounded-full p-6 mb-6">
+                            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">2. Instant Verification</h3>
+                        <p class="text-gray-600">Our innovative system helps you confirm the scam by sending a unique, time-sensitive code to the real person's trusted contacts.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center">
+                        <div class="bg-blue-100 text-blue-600 rounded-full p-6 mb-6">
+                            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">3. Alert & Action</h3>
+                        <p class="text-gray-600">Instantly notify the victim's network about the fake profile and generate a pre-filled report for submission to social media platforms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold">Core Features for Your Protection</h2>
+                    <p class="text-lg text-gray-600 mt-2">Built for everyone involved.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-bold text-lg mb-2">Universal Verification</h3>
+                        <p class="text-gray-600">One-time verification for a badge of trust on all partner platforms.</p>
+                    </div>
+                     <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-bold text-lg mb-2">Friend Verification</h3>
+                        <p class="text-gray-600">Lets friends check the authenticity of suspicious profiles.</p>
+                    </div>
+                     <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-bold text-lg mb-2">Instant Alerts</h3>
+                        <p class="text-gray-600">Sends immediate notifications to trusted contacts about fakes.</p>
+                    </div>
+                     <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-bold text-lg mb-2">Report Generation</h3>
+                        <p class="text-gray-600">Creates reports ready for submission to platforms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Authify. All rights reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">A proof-of-concept based on the VerifyMe Hackathon Challenge.</p>
+        </div>
+    </footer>
+
+
+    <!-- Verify Yourself Modal -->
+    <div id="verifyModal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50">
+        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-md p-8 m-4 transform scale-95">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Become Authify Verified</h2>
+                <button class="close-modal text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <p class="text-gray-600 mb-6">Sign in to connect your social accounts. Our verification process is quick, secure, and gives you a badge of trust across all partnered platforms.</p>
+            <button class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Sign In & Start Verification</button>
+        </div>
+    </div>
+
+    <!-- Impersonated Modal -->
+    <div id="impersonatedModal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50">
+        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-md p-8 m-4 transform scale-95">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Report Impersonation</h2>
+                <button class="close-modal text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <p class="text-gray-600 mb-6">Enter your social media profile URL. We'll scan for potential impersonators and guide you on next steps.</p>
+            <form id="impersonatedForm">
+                <div class="mb-4">
+                    <label for="myProfile" class="block text-gray-700 font-medium mb-2">Your Social Media Profile URL</label>
+                    <input type="url" id="myProfile" name="myProfile" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="https://platform.com/your-profile" required>
+                </div>
+                <button type="submit" class="w-full bg-red-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-600 transition duration-300">Scan for Fakes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Suspicious Message Modal -->
+    <div id="suspiciousModal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50">
+        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-md p-8 m-4 transform scale-95">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Verify a Suspicious Profile</h2>
+                <button class="close-modal text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+             <p class="text-gray-600 mb-6">Help protect your friend. Enter the details of the suspicious profile you encountered.</p>
+            <form id="suspiciousForm">
+                <div class="mb-4">
+                    <label for="suspiciousProfile" class="block text-gray-700 font-medium mb-2">Suspicious Profile URL</label>
+                    <input type="url" id="suspiciousProfile" name="suspiciousProfile" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="https://platform.com/suspicious-profile" required>
+                </div>
+                <div class="mb-6">
+                    <label for="friendName" class="block text-gray-700 font-medium mb-2">Name of Person Being Impersonated</label>
+                    <input type="text" id="friendName" name="friendName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., Jane Doe" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Start Verification</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Success Message/Alert Simulation -->
+    <div id="successMessage" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50">
+        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-md p-8 m-4 text-center transform scale-95">
+             <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+             </div>
+            <h2 class="text-2xl font-bold mb-4">Action Initiated!</h2>
+            <p class="text-gray-600 mb-6">Thank you. We have started the verification process. Trusted contacts of the user have been alerted, and a report has been generated for platform submission.</p>
+            <button id="closeSuccess" class="w-full bg-gray-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-700 transition duration-300">Close</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const impersonatedBtn = document.getElementById('impersonatedBtn');
+            const suspiciousBtn = document.getElementById('suspiciousBtn');
+            const verifyBtn = document.getElementById('verifyBtn');
+            const impersonatedModal = document.getElementById('impersonatedModal');
+            const suspiciousModal = document.getElementById('suspiciousModal');
+            const verifyModal = document.getElementById('verifyModal');
+            const successMessage = document.getElementById('successMessage');
+            
+            const closeButtons = document.querySelectorAll('.close-modal');
+            const closeSuccessBtn = document.getElementById('closeSuccess');
+
+            const impersonatedForm = document.getElementById('impersonatedForm');
+            const suspiciousForm = document.getElementById('suspiciousForm');
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Function to open a modal
+            const openModal = (modal) => {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modal.querySelector('.modal-content').classList.remove('scale-95');
+                }, 10);
+            };
+
+            // Function to close a modal
+            const closeModal = (modal) => {
+                modal.classList.add('opacity-0');
+                modal.querySelector('.modal-content').classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            };
+
+            // Event Listeners for opening modals
+            impersonatedBtn.addEventListener('click', () => openModal(impersonatedModal));
+            suspiciousBtn.addEventListener('click', () => openModal(suspiciousModal));
+            verifyBtn.addEventListener('click', () => openModal(verifyModal));
+            
+            // Event Listeners for closing modals
+            closeButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const modalToClose = e.target.closest('.modal-backdrop');
+                    if (modalToClose) {
+                        closeModal(modalToClose);
+                    }
+                });
+            });
+
+            closeSuccessBtn.addEventListener('click', () => closeModal(successMessage));
+            
+            // Close modal on backdrop click
+            window.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal-backdrop')) {
+                    closeModal(e.target);
+                }
+            });
+            
+            // Form submission simulation
+            const handleFormSubmit = (e) => {
+                e.preventDefault();
+                // Close the current modal
+                const currentModal = e.target.closest('.modal-backdrop');
+                if (currentModal) {
+                    closeModal(currentModal);
+                }
+                // Show the success/simulation message
+                setTimeout(() => openModal(successMessage), 350);
+                e.target.reset(); // Reset form fields
+            };
+
+            impersonatedForm.addEventListener('submit', handleFormSubmit);
+            suspiciousForm.addEventListener('submit', handleFormSubmit);
+
+        });
+    </script>
+</body>
+</html>
+
