@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authify Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #f9fafb;
+    }
+
+    .container {
+      display: flex;
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    /* Left panel */
+    .left {
+      flex: 1;
+      background: #eef2ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .left img {
+      width: 80%;
+      max-width: 350px;
+    }
+
+    /* Right panel */
+    .right {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .right h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .right p {
+      text-align: center;
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 25px;
+    }
+
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      margin-bottom: 20px;
+      transition: background 0.3s;
+    }
+
+    .google-btn:hover {
+      background: #f3f4f6;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #d1d5db;
+    }
+
+    .divider span {
+      margin: 0 10px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 5px;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border 0.3s;
+    }
+
+    input:focus {
+      border-color: #4f46e5;
+    }
+
+    .forgot {
+      text-align: right;
+      font-size: 12px;
+      margin-top: -10px;
+    }
+
+    .forgot a {
+      color: #4f46e5;
+      text-decoration: none;
+    }
+
+    .forgot a:hover {
+      text-decoration: underline;
+    }
+
+    .btn {
+      background: #4f46e5;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #4338ca;
+    }
+
+    .signup {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .signup a {
+      color: #4f46e5;
+      text-decoration: none;
+    }
+
+    .signup a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .left {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Illustration -->
+    <div class="left">
+      <img src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png" alt="Verification Graphic">
+    </div>
+
+    <!-- Right Login Section -->
+    <div class="right">
+      <h1>Authify</h1>
+      <p>Secure login to your account</p>
+
+      <!-- Google Login -->
+      <button class="google-btn">
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google Logo" width="20">
+        Continue with Google
+      </button>
+
+      <div class="divider"><span>or</span></div>
+
+      <!-- Form -->
+      <form>
+        <div>
+          <label>Email</label>
+          <input type="email" placeholder="you@example.com" required>
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="password" placeholder="••••••••" required>
+          <div class="forgot">
+            <a href="#">Forgot password?</a>
+          </div>
+        </div>
+        <button type="submit" class="btn">Log in</button>
+      </form>
+
+      <!-- Footer -->
+      <div class="signup">
+        Don’t have an account? <a href="#">Sign up</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
