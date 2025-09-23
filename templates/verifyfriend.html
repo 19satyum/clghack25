@@ -8,6 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page { display: none; }
+        .page.active { display: block; }
+    </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
     <div id="app" class="min-h-screen flex flex-col">
@@ -15,7 +19,7 @@
         <header class="bg-white shadow-sm sticky top-0 z-40">
              <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
                 <a href="index.html" class="text-2xl font-bold text-indigo-600">Authify</a>
-               {% if user %}
+                {% if user %}
                 <div class="relative" id="profile-menu-container">
                     <button id="profile-menu-button" class="block">
                         <img src="{{user.picture}}" class="w-10 h-10 rounded-full">
@@ -59,7 +63,18 @@
                  <div class="bg-white rounded-xl shadow-lg p-8">
                     <h2 class="text-3xl font-bold text-gray-900 mb-2">Verification Results</h2>
                     <p class="text-gray-600 mb-6">These are the only social media profiles verified by <strong id="friendNameDisplay">your friend</strong>. If the profile you're checking isn't listed here, it's a fake.</p>
-                    <div id="friendProfileList" class="space-y-3 mb-6 bg-gray-50 p-4 rounded-lg"></div>
+                    <div id="friendProfileList" class="space-y-3 mb-6 bg-gray-50 p-4 rounded-lg">
+                        <!-- Dynamic content will be inserted here by JS -->
+                         <div id="results" class="text-center">
+                            <p class="text-lg text-green-600 font-semibold">Instagram: @anshu.12</p>
+                            <p class="text-lg text-green-600 font-semibold">Snapchat: @a_nshu12</p>
+                            <p class="text-lg text-green-600 font-semibold">Discord: @anshu69</p>
+                            <p class="text-lg text-green-600 font-semibold">Tinder: @handsomeanshu</p>
+                            <p class="text-lg text-green-600 font-semibold">LinkedIn: @berozgaaranshu</p>
+                            <p class="text-lg text-green-600 font-semibold">Twitter: @intellectualanshu</p>
+                            <p class="text-lg text-green-600 font-semibold">Steam: @AnshuGaming</p>
+                        </div>
+                    </div>
                     <form id="suspiciousProfileForm">
                         <label for="suspiciousUrl" class="font-semibold text-lg mb-2 block">Is the profile you received suspicious?</label>
                         <p class="text-gray-600 mb-4 text-sm">Paste its link below. If it's not on the verified list, we will instantly alert your friend and their trusted contacts.</p>
@@ -68,6 +83,19 @@
                     </form>
                 </div>
             </div>
+            
+            <!-- Step 3: Confirmation Dialog -->
+            <div id="confirmationModal" class="page w-full max-w-md">
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4">Alert Sent & Action Taken!</h2>
+                    <p class="text-gray-600 mb-6">Thank you for your report. We have contacted the person being impersonated to alert them. We are also initiating action against the identity thief's account.</p>
+                    <button id="goToHomeBtn" class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700">Go to Home</button>
+                </div>
+            </div>
+
         </main>
 
         <!-- Footer -->
@@ -75,6 +103,54 @@
             <div class="container mx-auto px-6 py-6 text-center text-gray-600">&copy; 2024 Authify. All rights reserved.</div>
         </footer>
     </div>
-    <script type="module" src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const verifySearchForm = document.getElementById("verifySearchForm");
+            const suspiciousProfileForm = document.getElementById("suspiciousProfileForm");
+            const goToHomeBtn = document.getElementById("goToHomeBtn");
+
+            const verifySearchPage = document.getElementById("verify-search");
+            const verifyResultsPage = document.getElementById("verify-results");
+            const confirmationModal = document.getElementById("confirmationModal");
+
+            verifySearchForm.addEventListener("submit", function(e) {
+                e.preventDefault();
+                const input = document.getElementById("friendIdInput").value.trim();
+                const errorEl = document.getElementById("search-error");
+
+                if (input !== "") {
+                    errorEl.textContent = "";
+                    
+                    // In a real app, you'd fetch data here.
+                    // For this demo, we'll just switch views.
+                    document.getElementById('friendNameDisplay').textContent = "Anshu"; // Example
+
+                    verifySearchPage.classList.remove("active");
+                    verifyResultsPage.classList.add("active");
+                } else {
+                    errorEl.textContent = "Please enter an Authify ID.";
+                }
+            });
+
+            // --- Logic for the 'Check & Alert if Fake' button ---
+            suspiciousProfileForm.addEventListener("submit", function(e) {
+                e.preventDefault(); // Stop the form from submitting traditionally
+                const urlInput = document.getElementById('suspiciousUrl').value.trim();
+                
+                // Check if the user has entered a URL
+                if (urlInput) {
+                    // If a URL is present, hide the results page...
+                    verifyResultsPage.classList.remove("active");
+                    // ...and show the final confirmation dialog box.
+                    confirmationModal.classList.add("active");
+                }
+                // If the input is empty, the 'required' attribute on the input will prevent submission.
+            });
+
+            goToHomeBtn.addEventListener('click', () => {
+                window.location.href = '/';
+            });
+        });
+    </script>
 </body>
 </html>

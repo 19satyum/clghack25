@@ -19,6 +19,37 @@
         .modal-content {
             transition: transform 0.3s ease-in-out;
         }
+        .social-icon {
+            transition: transform 0.2s ease-in-out;
+        }
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* Marquee Styles */
+        @keyframes slide {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .marquee-track {
+            display: flex;
+            width: 200%; /* Double the width for seamless loop */
+            animation: slide 60s linear infinite;
+        }
+        .marquee:hover .marquee-track {
+            animation-play-state: paused;
+        }
+        .marquee-item {
+            flex-shrink: 0;
+            width: auto;
+            margin: 0 2rem; /* Spacing between icons */
+        }
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -34,7 +65,7 @@
                 
                 {% if user %}
                 <div class="relative" id="profile-menu-container">
-                    <button id="profile-menu-button" class="block" style="border: 4px solid green; border-radius: 50% ;background: transparent;">
+                    <button id="profile-menu-button" class="block" style="border: 4px solid rgb(56, 146, 56); border-radius: 50% ;background: transparent;">
                         <img src="{{user.picture}}" title="Verified" class="w-10 h-10 rounded-full">
                     </button>
                     <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-90 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
@@ -44,9 +75,10 @@
                                 <p class="text-sm text-gray-500 truncate">{{user.email}}</p>
                                 <p class="text-sm font-semibold text-gray-500 truncate">Authify ID: {{authifyID}}</p>
                                 <hr class="my-1">
+                                <button class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Authorise Apps</button>
+                                <hr class="my-1">
                                 <p class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Allow others to find your ID on other social medias <input type="checkbox"></p>
                                 
-
 
                             </div>
                             <hr class="my-1">
@@ -83,17 +115,26 @@
                 
                 <div class="mt-16">
                     <p class="text-gray-600 font-medium mb-6">A single verification for all your favorite platforms</p>
-                    <div class="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
-                        <div class="flex items-center gap-2 text-gray-500 hover:text-black transition-colors">
-                        </div>
-                        <div class="flex items-center gap-2 text-gray-500 hover:text-black transition-colors">
-                                <svg class="w-8 h-8" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Snapchat</title><path d="M23.882 18.022a2.333 2.333 0 01-1.664.683 2.336 2.336 0 01-1.636-.653l-3.23-3.23c-.347.058-.67.087-1.03.087-1.117 0-2.146-.347-3.118-1.03-.493.522-1.044 1.13-1.664 1.75l-1.918 1.83c-.986.986-2.26 1.48-3.532 1.48-1.274 0-2.546-.494-3.533-1.48L.12 14.937a.348.348 0 010-.493L2.24 12.33c.116-.116.32-.116.435 0l1.246 1.246c.93.93 2.145 1.395 3.36 1.395 1.217 0 2.432-.465 3.36-1.395l.435-.435c.116-.116.116-.32 0-.435l-.87-.87c-.116-.116-.32-.116-.435 0l-.52.52c-.406.406-1.044.58-1.578.435-.9-.26-1.45-1.16-1.217-2.06.203-.812.9-1.395 1.722-1.395.405 0 .81.145 1.13.435l.897.897c.116.116.32.116.435 0l.435-.435c.116-.116.116-.32 0-.435l-.87-.87c-.116-.116-.32-.116-.435 0l-.52.52c-.406.406-1.044.58-1.578.435-.9-.26-1.45-1.16-1.217-2.06.203-.812.9-1.395 1.722-1.395.405 0 .81.145 1.13.435l2.06 2.06c.116.116.32.116.435 0l.435-.435c.116-.116.116-.32 0-.435l-.87-.87c-.116-.116-.32-.116-.435 0l-.52.52c-.406.406-1.044.58-1.578.435-.9-.26-1.45-1.16-1.217-2.06C8.83 2.22 9.527 1.64 10.35 1.64c.406 0 .81.145 1.13.435l4.636 4.636c.116.116.32.116.435 0l.435-.435c.116-.116.116-.32 0-.435l-2.6-2.607C13.29.145 12.075-.32 10.86.3c-1.015.52-1.55 1.665-1.245 2.75.29 1.044 1.246 1.75 2.347 1.75.522 0 1.017-.174 1.45-.52l2.173-2.175c.116-.116.32-.116.435 0l.435.435c.116.116.116-.028 0 .087l-2.23 2.23c-1.103 1.102-1.103 2.898 0 4l.435.435c.116.116.32.116.435 0l.435-.435c1.102-1.102 1.102-2.898 0-4l-.87-.87c-.116-.116-.03-.32.086-.32.117 0 .204.03.29.116l4.29 4.29c.957.957 2.23 1.45 3.504 1.45.03 0 .058 0 .087 0 .116 0 .203-.03.29-.116l.87-.87c.116-.116.03-.32-.087-.32-.116 0-.203.03-.29.116l-.52.52c-.957.957-2.23 1.45-3.504 1.45-1.273 0-2.547-.493-3.504-1.45l-4.29-4.29c-1.102-1.102-2.898-1.102-4 0l-1.303 1.304-.754-.754.956-.957c.957-.957 1.45-2.23 1.45-3.504 0-.03 0-.058 0-.087 0-.116.03-.203.116-.29l.87-.87c.116-.116.32-.03.32.086 0 .117-.03.204-.116.29l-.52.52c-.957.957-1.45 2.23-1.45 3.504 0 1.274.493 2.547 1.45 3.504l4.29 4.29c.116.116.116.32 0 .435z" fill="currentColor"/></svg>
-                        </div>
-                        <div class="flex items-center gap-2 text-gray-500 hover:text-black transition-colors">
-                            <svg class="w-8 h-8" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Telegram</title><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.17.91-.494 1.208-.822 1.23-.696.04-1.22-.46-1.864-.902-1.056-.72-1.656-1.17-2.67-1.848-.945-.624-.33-1.002.21-1.59.09-.09.16-.18.23-.26.87-1.02 1.74-2.05 2.61-3.07.22-.25.43-.53.06-.8-.43-.32-1.03-.22-1.53-.22-.52 0-1.08.06-1.74.22-1.25.31-2.2.62-2.87.82-.75.23-1.37.35-1.9.33-.5-.02-1.02-.15-1.4-.49-.43-.37-.56-1.03-.48-1.58.18-1.16.92-2.2 1.6-3.15.67-.92 1.45-1.72 2.75-2.52 1.25-.78 2.6-.9 3.9-.3 1.15.5 1.83 1.4 2.1 2.55.05.22.08.41.08.57a.5.5 0 0 1-.01.07z" fill="currentColor"/></svg>
-                        </div>
-                        <div class="flex items-center gap-2 text-gray-500 hover:text-black transition-colors">
-                            <svg class="w-8 h-8" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Discord</title><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.885-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4464.8245-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1619-.425-.3973-.8742-.6083-1.2495a.0741.0741 0 0 0-.0785-.0371 19.7913 19.7913 0 0 0-4.885 1.5152.069.069 0 0 0-.0321.0233c-1.933 3.2282-3.1238 6.9468-3.4687 10.7484a.0741.0741 0 0 0 .029.0593c2.8152 1.9365 5.5827 3.2905 8.2818 3.8658a.0741.0741 0 0 0 .0825-.0233c.4654-.63.875-1.2933 1.2278-1.9942a.0741.0741 0 0 0-.041-.1063c-.63-.2652-1.2278-.5537-1.7915-.8651a.0741.0741 0 0 1-.0233-.094c.0321-.0611.0611-.1222.0882-.1863a.0741.0741 0 0 1 .094-.0321c3.5414 1.5847 7.2882 1.5847 10.7937 0a.0741.0741 0 0 1 .094.0321c.027.0641.0561.1252.0882.1863a.0741.0741 0 0 1-.0233.094c-.5637.3114-1.1615.6-1.7915.8651a.0741.0741 0 0 0-.041.1063c.3528.701.7624 1.3642 1.2278 1.9942a.0741.0741 0 0 0 .0825.0233c2.6991-.5753 5.4666-1.9293 8.2818-3.8658a.0741.0741 0 0 0 .029-.0593c-.345-3.8016-1.5358-7.5202-3.4687-10.7484a.069.069 0 0 0-.0321-.0233zM8.02 15.3312c-.7854 0-1.422-1.0256-1.422-2.2848s.6366-2.2848 1.422-2.2848c.7853 0 1.422 1.0256 1.422 2.2848s-.6366 2.2848-1.422 2.2848zm7.9548 0c-.7854 0-1.422-1.0256-1.422-2.2848s.6366-2.2848 1.422-2.2848c.7854 0 1.422 1.0256 1.422 2.2848.0001 1.2592-.6366 2.2848-1.422 2.2848z" fill="currentColor"/></svg>
+                    <div class="marquee">
+                        <div class="marquee-track">
+                            <!-- Original Set of Icons -->
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Facebook</title><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Instagram</title><defs><radialGradient id="ig-grad" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><path fill="url(#ig-grad)" d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.784.3-1.467.717-2.137 1.387S.93 3.356.63 4.14C.333 4.905.132 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.26 2.148.558 2.913.3.784.717 1.467 1.387 2.137s1.353.99 2.137 1.29c.765.296 1.636.496 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.26 2.913-.558.784-.3 1.467-.717 2.137-1.387s.99-1.353 1.29-2.137c.296-.765.496-1.636.558-2.913.06-1.277.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.26-2.148-.558-2.913-.3-.784-.717-1.467-1.387-2.137S20.644.93 19.86.63c-.765-.297-1.636-.496-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.07 1.17.05 1.805.248 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.054 1.265.07 1.646.07 4.85s-.016 3.585-.07 4.85c-.05 1.17-.248 1.805-.413 2.227-.217.562-.477.96-.896 1.382-.42.419-.82.679-1.382.896-.422.164-1.057.36-2.227.413-1.265.054-1.646.07-4.85.07s-3.585-.016-4.85-.07c-1.17-.05-1.805-.248-2.227-.413-.562-.217-.96-.477-1.382-.896-.419-.42-.679-.82- .896-1.382-.164-.422-.36-1.057-.413-2.227-.054-1.265-.07-1.646-.07-4.85s.016-3.585.07-4.85c.05-1.17.248-1.805.413-2.227.217-.562.477-.96.896-1.382.42-.419.82-.679 1.382-.896.422-.164 1.057-.36 2.227-.413C8.415 2.176 8.797 2.16 12 2.16zm0 5.482A4.36 4.36 0 1 0 12 16.36a4.36 4.36 0 0 0 0-8.718zm0 7.218a2.86 2.86 0 1 1 0-5.718 2.86 2.86 0 0 1 0 5.718zM17.804 4.155a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" fill="#000000"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>TikTok</title><path d="M12.525.02c1.31-.02 2.61-.01 3.91.02.08 0 .14.02.2.04.1.04.18.1.26.15.1.07.18.16.25.25.07.1.13.2.18.31.04.1.06.2.09.31.03.1.04.2.04.3v.49c-.02.3-.09.6-.2.88-.08.2-.2.38-.34.54-.14.17-.3.3-.48.4s-.38.16-.58.15c-.2-.02-.39-.07-.57-.14s-.35-.15-.5-.25c-.15-.1-.28-.23-.4-.37-.12-.14-.23-.28-.32-.44s-.17-.33-.23-.51c-.06-.18-.09-.37-.09-.56v-3.2c0-.18.02-.36.06-.53.04-.17.1-.33.18-.49.08-.16.18-.3.3-.42.12-.12.25-.23.4-.32s.3-.15.46-.19c.16-.04.32-.06.48-.06.17 0 .33.02.49.06.16.04.3.1.44.18.13.08.26.18.37.29.11.11.2.23.28.36.08.13.14.26.19.4.05.13.08.27.1.41h2.12c-.02-.87-.22-1.72-.59-2.52s-.88-1.5-1.5-2.08c-.6-.58-1.32-1.04-2.12-1.36s-1.66-.48-2.54-.48c-1.31.02-2.61.01-3.91-.02-.08 0-.14-.02-.2-.04-.1-.04-.18-.1-.26-.15-.1-.07-.18-.16-.25-.25-.07-.1-.13-.2-.18-.31-.04-.1-.06-.2-.09-.31-.03-.1-.04-.2-.04-.3v-.49c.02-.3.09-.6.2-.88.08-.2.2-.38.34-.54.14.17.3.3.48.4s.38.16.58.15c.2.02.39.07.57.14s.35.15.5.25c.15.1.28.23.4.37.12.14.23.28.32.44s.17.33.23.51c.06.18.09.37.09.56v3.2c0 .18-.02.36-.06.53-.04.17-.1.33-.18.49-.08.16-.18.3-.3.42-.12.12-.25.23-.4.32s-.3.15-.46.19c-.16.04-.32.06-.48.06-.17 0-.33-.02-.49-.06-.16-.04-.3-.1-.44-.18-.13-.08-.26-.18-.37-.29s-.2-.23-.28-.36c-.08-.13-.14-.26-.19-.4s-.08-.27-.1-.41H.11c.02.87.22,1.72.59,2.52s.88,1.5,1.5,2.08c.6.58,1.32,1.04,2.12,1.36s1.66.48,2.54.48,1.8-.16,2.54-.48,1.52-.78,2.12-1.36c.6-.58,1.06-1.28,1.38-2.08s.48-1.65.46-2.52h-2.12Z" fill="#FF0050"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" fill="#0A66C2"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>WhatsApp</title><path d="M12.04 2.16C6.58 2.16 2.16 6.58 2.16 12.04c0 1.8.49 3.48 1.34 4.95L2.5 21.5l4.66-1.22c1.4.78 3.02 1.22 4.76 1.22h.02c5.46 0 9.88-4.42 9.88-9.88 0-5.46-4.42-9.88-9.88-9.88zm0 0M8.01 6.84c.14-.24.42-.38.7-.38h.14c.28 0 .56.14.84.56l.98 1.54c.28.42.42.84.14 1.26-.28.42-.42.56-.7.84-.28.28-.56.56-.28.98.28.42.98 1.4 1.96 2.38s1.96 1.68 2.38 1.96c.42.28.7.0 1.12-.28.28-.28.56-.42.84-.7s.84.0 1.26.14l1.54.98c.42.28.7.56.56.84 0 .28-.14.7-.38.84s-.56.42-1.26.28c-1.26-.28-2.66-.84-3.92-2.1-1.4-1.26-2.38-2.8-2.66-4.2-.14-.7.14-1.26.28-1.26z" fill="#25D366"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Telegram</title><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.17.91-.494 1.208-.822 1.23-.696.04-1.22-.46-1.864-.902-1.056-.72-1.656-1.17-2.67-1.848-.945-.624-.33-1.002.21-1.59.09-.09.16-.18.23-.26.87-1.02 1.74-2.05 2.61-3.07.22-.25.43-.53.06-.8-.43-.32-1.03-.22-1.53-.22-.52 0-1.08.06-1.74.22-1.25.31-2.2.62-2.87.82-.75.23-1.37.35-1.9.33-.5-.02-1.02-.15-1.4-.49-.43-.37-.56-1.03-.48-1.58.18-1.16.92-2.2 1.6-3.15.67-.92 1.45-1.72 2.75-2.52 1.25-.78 2.6-.9 3.9-.3 1.15.5 1.83 1.4 2.1 2.55.05.22.08.41.08.57a.5.5 0 0 1-.01.07z" fill="#26A5E4"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Discord</title><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.885-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4464.8245-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1619-.425-.3973-.8742-.6083-1.2495a.0741.0741 0 0 0-.0785-.0371 19.7913 19.7913 0 0 0-4.885 1.5152.069.069 0 0 0-.0321.0233c-1.933 3.2282-3.1238 6.9468-3.4687 10.7484a.0741.0741 0 0 0 .029.0593c2.8152 1.9365 5.5827 3.2905 8.2818 3.8658a.0741.0741 0 0 0 .0825-.0233c.4654-.63.875-1.2933 1.2278-1.9942a.0741.0741 0 0 0-.041-.1063c-.63-.2652-1.2278-.5537-1.7915-.8651a.0741.0741 0 0 1-.0233-.094c.0321-.0611.0611-.1222.0882-.1863a.0741.0741 0 0 1 .094-.0321c3.5414 1.5847 7.2882 1.5847 10.7937 0a.0741.0741 0 0 1 .094.0321c.027.0641.0561.1252.0882.1863a.0741.0741 0 0 1-.0233.094c-.5637.3114-1.1615.6-1.7915.8651a.0741.0741 0 0 0-.041.1063c.3528.701.7624 1.3642 1.2278 1.9942a.0741.0741 0 0 0 .0825.0233c2.6991-.5753 5.4666-1.9293 8.2818-3.8658a.0741.0741 0 0 0 .029-.0593c-.345-3.8016-1.5358-7.5202-3.4687-10.7484a.069.069 0 0 0-.0321-.0233zM8.02 15.3312c-.7854 0-1.422-1.0256-1.422-2.2848s.6366-2.2848 1.422-2.2848c.7853 0 1.422 1.0256 1.422 2.2848s-.6366 2.2848-1.422 2.2848zm7.9548 0c-.7854 0-1.422-1.0256-1.422-2.2848s.6366-2.2848 1.422-2.2848c.7854 0 1.422 1.0256 1.422 2.2848.0001 1.2592-.6366 2.2848-1.422 2.2848z" fill="#5865F2"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Snapchat</title><path d="M10.882 12c0 1.428-.43 2.76-1.18 3.905-1.037 1.58-2.65 2.65-4.512 3.125-1.12.285-2.25.345-3.345.18-.56-.08-1.11-.25-1.635-.495-.08-.03-.14-.09-.17-.17-.03-.08-.03-.16 0-.24.16-.4.3-.8.4-1.2.14-.38.25-.76.33-1.14.05-.2.08-.4.08-.6 0-.2-.03-.4-.08-.6-.08-.38-.19-.76-.33-1.14-.1-.4-.24-.8-.4-1.2-.03-.08-.03-.16 0-.24.03-.08.09-.14.17-.17.525-.245 1.075-.415 1.635-.495 1.095-.165 2.22-.105 3.345.18 1.862.475 3.475 1.545 4.512 3.125.75 1.145 1.18 2.477 1.18 3.905zM24 18.23c0 .87-.31 1.69-.87 2.37-.56.68-1.31 1.15-2.16 1.36-1.15.28-2.3.28-3.45 0-1.14-.28-2.17-.83-2.97-1.58-.22-.2-.48-.3-.75-.3-.27 0-.53.1-.75.3-.8.75-1.83 1.3-2.97 1.58-1.15.28-2.3.28-3.45 0-.85-.21-1.6-.68-2.16-1.36C.31 19.92 0 19.1 0 18.23c0-1.2.5-2.33 1.37-3.15.87-.82 2-1.3 3.22-1.3H5c.45 0 .83-.34 1-.78.1-.28.14-.56.14-.85 0-.6-.2-1.18-.58-1.65-.9-1.08-2.4-1.74-4-1.74H1.5c-.2 0-.38-.08-.52-.22-.14-.14-.22-.32-.22-.52V9c0-1.15.35-2.24.98-3.16C2.4 4.92 3.33 4.2 4.43 3.82c1.1-.38 2.28-.4 3.42-.08 1.14.32 2.15.96 2.92 1.82.25.28.6.44.98.44.38 0 .73-.16.98-.44.77-.86 1.78-1.5 2.92-1.82 1.14-.32 2.32-.3 3.42.08 1.1.38 2.03 1.1 2.67 2.02.63.92.98 2.01.98 3.16v.98c0 .2-.08.38-.22.52s-.32.22-.52.22H19c-1.6 0-3.1.66-4 1.74-.38.47-.58 1.05-.58 1.65 0 .29.04.57.14.85.17.44.55.78 1 .78h.38c1.22 0 2.35.48 3.22 1.3.9 1 1.4 2.1 1.4 3.3z" fill="#FFFC00"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Messenger</title><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm1.14 15.228l-2.42-2.502-4.94 2.502 5.56-5.83-2.37-2.522 4.94-2.522-5.56 5.85z" fill="#0078FF"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Threads</title><path d="M14.152 1.434c-2.378-.63-4.904-.01-6.953 1.6-1.812 1.42-2.91 3.52-2.91 5.74v.2c0 1.25.4 2.5 1.21 3.51.98 1.2.22 2.91-1.31 3.54-1.12.46-2.22.18-3.1-.73-.2-.2-.5-.13-.6.1l-.3.9a.44.44 0 00.1.5c1.43 1.2 3.2 1.7 5 1.52 2.37.63 4.9.01 6.95-1.6 1.81-1.42 2.91-3.52 2.91-5.74v-.2c0-1.25-.4-2.5-1.2-3.51-.99-1.2-.23-2.91 1.3-3.54 1.13-.46 2.23-.18 3.1.73.2.2.5.13.6-.1l.3-.9a.44.44 0 00-.1-.5c-1.42-1.2-3.2-1.7-5-1.52z" fill="#000000"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Tinder</title><path d="M12.63.21c-1.92.0-3.61.34-5.06,1.03-1.45.68-2.6,1.6-3.41,2.71a6.83,6.83,0,0,0-1.1,1.93,8.74,8.74,0,0,0-.47,2.23,12.23,12.23,0,0,0-.06,2.69V19.8a3.78,3.78,0,0,0,1.15,2.83,3.78,3.78,0,0,0,2.83,1.15h.6v-13h-.6a.63.63,0,0,1-.63-.63V9.13a.63.63,0,0,1,.63-.63H18.5a.63.63,0,0,1,.63.63v.38a.63.63,0,0,1-.63.63h-.6V23.78h.6a3.78,3.78,0,0,0,2.83-1.15,3.78,3.78,0,0,0,1.15-2.83V10.8c0-1-.02-1.85-.06-2.69a8.74,8.74,0,0,0-.47-2.23,6.83,6.83,0,0,0-1.1-1.93c-.82-1.11-1.96-2.03-3.41-2.71C16.24.55,14.55.21,12.63.21Z" fill="#FD297B"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Bumble</title><path d="M12.33 2.1c-1.3 0-2.58.18-3.75.52-1.17.34-2.25.86-3.17 1.54-.92.68-1.68 1.54-2.23 2.53-.55.99-.87 2.14-.87 3.39v6.52c0 .92.24 1.83.69 2.62.45.79.99 1.4 1.6 1.86.61.46 1.26.74 1.94.85.68.11 1.34.02 2.01-.22.67-.24 1.25-.66 1.7-1.2.45-.54.75-1.18.86-1.87.11-.69.02-1.39-.23-2.07-.25-.68-.67-1.28-1.2-1.74-.53-.46-1.14-.77-1.78-.91-.64-.14-1.27-.1-1.91.13-.64.23-1.21.6-1.68 1.06-.47.46-.8 1-.95 1.58-.09.33-.14.68-.14 1.03 0 .4.1.79.28 1.11.18.32.42.58.7.75.28.17.58.26.88.26h.1c.32 0 .63-.07.92-.2s.55-.35.75-.6c.2-.25.33-.55.39-.88.06-.33.04-.67-.04-1-.08-.33-.23-.64-.42-.91-.19-.27-.42-.5-.68-.67-.26-.17-.54-.28-.83-.34-.29-.06-.58-.06-.87-.02s-.56.14-.8.27c-.24.13-.46.3-.64.5-.18.2-.32.42-.42.66-.1.24-.15.49-.15.75 0 .28.05.56.16.82.11.26.26.5.46.68.2.18.43.32.68.4.25.08.51.12.77.12.44 0 .86-.1 1.26-.28.4-.18.75-.44 1.03-.75.28-.31.49-.66.62-1.03.13-.37.18-.76.13-1.14s-.18-.75-.38-1.09c-.2-.34-.46-.64-.76-.88-.3-.24-.65-.43-1.01-.55-.36-.12-.74-.18-1.12-.17-.38.01-.76.08-1.12.2-.36.12-.7.3-1.01.52-.31.22-.58.48-.8.78-.22.3-.39.63-.5.98-.11.35-.16.72-.16 1.08 0 .42.08.84.24 1.24s.4.76.7 1.06c.3.3.65.54.01.7.35.16.72.26 1.08.26.6 0 1.18-.16 1.7-.44.52-.28.98-.68 1.34-1.16.36-.48.62-1.04.76-1.62.14-.58.16-1.18.06-1.78-.1-.6-.32-1.16-.64-1.66-.32-.5-.73-.92-1.2-1.24-.47-.32-1-.54-1.54-.64-.54-.1-1.08-.08-1.62.06-.54.14-1.05.4-1.5.76-.45.36-.82.8-1.1 1.3-.28.5-.46 1.05-.52 1.62-.06.57.02 1.16.22 1.72.2.56.52 1.08.94 1.52.42.44.92.78 1.46 1.02.54.24 1.12.38 1.7.4.58.02 1.18-.08 1.74-.28.56-.2.08-.5 1.54-.86.46-.36.86-.78 1.18-1.26.32-.48.55-1 .66-1.54.11-.54.12-1.1.02-1.66-.1-.56-.3-1.1-.6-1.58-.3-.48-.68-.9-1.12-1.24-.44-.34-.92-.6-1.42-.76-.5-.16-1-.22-1.5-.18-.5.04-1 .18-1.44.4-.44.22-.84.52-1.17.88-.33.36-.58.78-.74 1.22-.16.44-.22.9-.18 1.36.04.46.18.9.4 1.3.22.4.52.74.88 1.01.36.27.76.46 1.18.56.42.1.85.1 1.28.02.43-.08.84-.24 1.22-.48.38-.24.72-.56.98-.92.26-.36.45-.76.54-1.18.09-.42.08-.86-.02-1.28-.1-.42-.3-.82-.56-1.17-.26-.35-.58-.65-.94-.88-.36-.23-.75-.38-1.15-.45-.4-.07-.8-.06-1.2.03-.4.09-.78.25-1.14.48-.36.23-.68.52-.95.84-.27.32-.48.68-.62 1.05-.14.37-.2.75-.18 1.14.02.39.12.76.3 1.12.18.36.42.68.72.95.3.27.64.48.01.62.36.14.74.2 1.12.18.6-.04 1.18-.24 1.68-.56.5-.32.92-.76 1.24-1.26.32-.5.54-1.06.64-1.64.1-.58.08-1.18-.06-1.76-.14-.58-.4-1.12-.76-1.6-.36-.48-.82-.88-1.34-1.18-.52-.3-1.1-.48-1.7-.52-.6-.04-1.2.06-1.78.28-.58.22-1.12.56-1.58.98-.46.42-.84.92-1.12 1.46-.28.54-.46 1.12-.52 1.72s.04 1.2.22 1.78c.18.58.48 1.12.88 1.6.4.48.88.9 1.42 1.24.54.34 1.12.6 1.72.76.6.16 1.22.22 1.82.18.6-.04 1.2-.2 1.76-.46.56-.26 1.08-.62 1.52-1.06.44-.44.8-1 1.06-1.6.26-.6.4-1.24.42-1.9s-.06-1.32-.3-1.94c-.24-.62-.6-1.2-1.04-1.7-.44-.5-1-1-1.6-1.38-.6-.38-1.25-.66-1.92-.82-.67-.16-1.36-.2-2.04-.12s-1.34.3-1.94.62c-.6.32-1.14.76-1.6 1.28-.46.52-.82 1.12-1.06 1.76-.24.64-.36 1.32-.36 2V12c0 .68.12 1.36.36 2 .24.64.6 1.24 1.06 1.76s.98.98 1.6 1.28c.62.3.28.48 1.94.62.66.14 1.34.18 2.02.12.68-.06 1.35-.24 1.98-.54.63-.3 1.22-.7 1.74-1.2.52-.5.96-1.1 1.3-1.78.34-.68.56-1.42.64-2.18.08-.76.02-1.53-.16-2.28-.18-.75-.5-1.47-.92-2.1s-.94-1.2-1.54-1.68c-.6-.48-1.28-.86-2-1.12-.72-.26-1.48-.4-2.24-.4z" fill="#FFC629"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Grindr</title><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 3.1c1.23 0 2.3.28 3.23.83.92.56 1.68 1.32 2.24 2.24.56.93.83 1.99.83 3.23 0 1.23-.28 2.3-.83 3.23-.56.92-1.32 1.68-2.24 2.24-.93.56-1.99.83-3.23.83-1.23 0-2.3-.28-3.23-.83-.92-.56-1.68-1.32-2.24-2.24-.56-.93-.83-1.99-.83-3.23 0-1.23.28-2.3.83-3.23.56-.92 1.32-1.68 2.24-2.24.93-.55 2-.83 3.23-.83zm0 17.8c-1.23 0-2.3-.28-3.23-.83-.92-.56-1.68-1.32-2.24-2.24-.56-.93-.83-1.99-.83-3.23 0-1.23.28-2.3.83-3.23.56-.92 1.32-1.68 2.24-2.24.93-.56 1.99-.83 3.23-.83 1.23 0 2.3.28 3.23.83.92.56 1.68 1.32 2.24 2.24.56.93.83 1.99.83 3.23 0 1.23-.28 2.3-.83 3.23-.56.92-1.32 1.68-2.24-2.24-.93-.55-2-.83-3.23-.83z" fill="#FFC629"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>SoundCloud</title><path d="M3.744 11.232c0-1.104.864-2 1.968-2h.528v6.48h-.528c-1.104 0-1.968-.888-1.968-2v-2.48zM6.912 9.24H7.8v8.4H6.912V9.24zm2.088 1.2v6h.888v-6h-.888zm2.064-1.2c0-1.104.864-2 1.968-2h.864c1.104 0 1.968.896 1.968 2v6.48c0 1.104-.864 2-1.968 2h-.864c-1.104 0-1.968-.896-1.968-2V9.24zM16.92 9.24h.888v8.4h-.888V9.24zM0 12.012C0 5.376 5.376 0 12 0s12 5.376 12 12.012c0 6.624-5.376 11.988-12 11.988S0 18.636 0 12.012z" fill="#FF5500"/></svg></div>
+                            <div class="marquee-item social-icon"><svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Steam</title><path d="M12,0C5.37,0,0,5.37,0,12c0,5.2,3.29,9.66,7.76,11.34L12,20.89l5.08,1.45c.42.12.87.18,1.31.18c3.62,0,6.6-2.98,6.6-6.6S22.02,9.22,18.4,9.22c-.22,0-.44,0-.65.03L12,9.75l-4.22-3.32C9.4,3.14,13.25.01,17.65,0H12zm1.94,11.77c.38-.45.33-.94.33-1.09c0-1.07-.86-1.93-1.93-1.93s-1.93.86-1.93,1.93c0,.15-.05.64.33,1.09c.89,1.06,2.22,1.3,2.22,1.3s-1.33.24-2.22,1.3c-.38.45-.33.94-.33,1.09c0,1.07.86,1.93,1.93,1.93s1.93-.86,1.93-1.93c0-.15.05-.64-.33-1.09c-.89-1.06-2.22-1.3-2.22-1.3s1.33-.24,2.22-1.3zM15.93,8.08c1.23,0,2.23,1,2.23,2.23c0,1.23-1,2.23-2.23,2.23s-2.23-1-2.23-2.23c0-1.23,1-2.23,2.23-2.23zm-3.05,4.71c.73,0,1.32.59,1.32,1.32c0,.73-.59,1.32-1.32,1.32c-.73,0-1.32-.59-1.32-1.32c0-.73.59-1.32,1.32-1.32z" fill="#000000"/></svg></div>
+                            
                         </div>
                     </div>
                 </div>
@@ -241,14 +282,50 @@
         </div>
     </div>
     
-    <div id="successMessage" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50">
+    <!-- New Modal for "Verify a Profile" result -->
+    <div id="fakeProfileResultModal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50">
         <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-md p-8 m-4 text-center transform scale-95">
-             <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-             </div>
-            <h2 class="text-2xl font-bold mb-4">Action Initiated!</h2>
-            <p class="text-gray-600 mb-6">Thank you. We have started the verification process. Trusted contacts of the user have been alerted, and a report has been generated for platform submission.</p>
-            <button id="closeSuccess" class="w-full bg-gray-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-700 transition duration-300">Close</button>
+             <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            </div>
+            <h2 class="text-2xl font-bold mb-4">Verification Result</h2>
+            <p class="text-gray-600 mb-6">We have checked all our partner sites and could not find a verified Authify ID associated with this profile. This person might be a fake. We have logged this incident for review.</p>
+            <button class="close-modal w-full bg-gray-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-700 transition duration-300">Close</button>
+        </div>
+    </div>
+
+    <!-- New Modal for "Start My Check" result -->
+    <div id="confirmImpersonatorsModal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50">
+        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-lg p-8 m-4 transform scale-95">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Potential Impersonators Found</h2>
+                <button class="close-modal text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <p class="text-gray-600 mb-6">We found the following profiles with a similar name and profile picture to yours. Please confirm which of these are not you so we can take action.</p>
+            <div class="space-y-4 max-h-64 overflow-y-auto pr-2">
+                <!-- Example Profiles -->
+                <div class="flex items-center justify-between bg-gray-100 p-3 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <img src="https://placehold.co/40x40/E2E8F0/4A5568?text=PFP" alt="Profile Picture" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-semibold">Jane Doe</p>
+                            <p class="text-sm text-gray-500">instagram.com/jane_doe_123</p>
+                        </div>
+                    </div>
+                    <button class="bg-red-500 text-white text-sm font-bold py-2 px-3 rounded-lg hover:bg-red-600">This is not me</button>
+                </div>
+                <div class="flex items-center justify-between bg-gray-100 p-3 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <img src="https://placehold.co/40x40/E2E8F0/4A5568?text=PFP" alt="Profile Picture" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-semibold">Jane D.</p>
+                            <p class="text-sm text-gray-500">facebook.com/janeyd-456</p>
+                        </div>
+                    </div>
+                    <button class="bg-red-500 text-white text-sm font-bold py-2 px-3 rounded-lg hover:bg-red-600">This is not me</button>
+                </div>
+            </div>
+             <button class="close-modal w-full bg-gray-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-700 transition duration-300 mt-6">Close</button>
         </div>
     </div>
 
@@ -258,13 +335,14 @@
             const impersonatedBtn = document.getElementById('impersonatedBtn');
             const suspiciousBtn = document.getElementById('suspiciousBtn');
             const verifyBtn = document.getElementById('verifyBtn');
+            
             const impersonatedModal = document.getElementById('impersonatedModal');
             const suspiciousModal = document.getElementById('suspiciousModal');
             const verifyModal = document.getElementById('verifyModal');
-            const successMessage = document.getElementById('successMessage');
-            
+            const fakeProfileResultModal = document.getElementById('fakeProfileResultModal');
+            const confirmImpersonatorsModal = document.getElementById('confirmImpersonatorsModal');
+
             const closeButtons = document.querySelectorAll('.close-modal');
-            const closeSuccessBtn = document.getElementById('closeSuccess');
 
             const impersonatedForm = document.getElementById('impersonatedForm');
             const suspiciousForm = document.getElementById('suspiciousForm');
@@ -287,6 +365,7 @@
 
             // Function to close a modal
             const closeModal = (modal) => {
+                if (!modal) return;
                 modal.classList.add('opacity-0');
                 modal.querySelector('.modal-content').classList.add('scale-95');
                 setTimeout(() => {
@@ -308,8 +387,6 @@
                     }
                 });
             });
-
-            closeSuccessBtn.addEventListener('click', () => closeModal(successMessage));
             
             // Close modal on backdrop click
             window.addEventListener('click', (e) => {
@@ -318,21 +395,21 @@
                 }
             });
             
-            // Form submission simulation
-            const handleFormSubmit = (e) => {
+            // Form submission for "I think I'm being impersonated"
+            impersonatedForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                // Close the current modal
-                const currentModal = e.target.closest('.modal-backdrop');
-                if (currentModal) {
-                    closeModal(currentModal);
-                }
-                // Show the success/simulation message
-                setTimeout(() => openModal(successMessage), 350);
-                e.target.reset(); // Reset form fields
-            };
+                closeModal(impersonatedModal);
+                setTimeout(() => openModal(confirmImpersonatorsModal), 350);
+                e.target.reset();
+            });
 
-            impersonatedForm.addEventListener('submit', handleFormSubmit);
-            suspiciousForm.addEventListener('submit', handleFormSubmit);
+            // Form submission for "I received a suspicious message"
+            suspiciousForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                closeModal(suspiciousModal);
+                setTimeout(() => openModal(fakeProfileResultModal), 350);
+                e.target.reset();
+            });
 
             // Added: Profile Dropdown Logic
             const profileMenuButton = document.getElementById('profile-menu-button');
