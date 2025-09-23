@@ -15,12 +15,10 @@ google = oauth.register(
     name="google",
     client_secret= os.getenv("client_secret"),
     client_id= os.getenv("client_id"),
-
     server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
     client_kwargs={"scope": "openid email profile"},
     api_base_url='https://openidconnect.googleapis.com/v1/',
     userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo'
-
 )
 
 

@@ -34,15 +34,20 @@
                 
                 {% if user %}
                 <div class="relative" id="profile-menu-container">
-                    <button id="profile-menu-button" class="block">
-                        <img src="{{user.picture}}" class="w-10 h-10 rounded-full">
+                    <button id="profile-menu-button" class="block" style="border: 4px solid green; border-radius: 50% ;background: transparent;">
+                        <img src="{{user.picture}}" title="Verified" class="w-10 h-10 rounded-full">
                     </button>
-                    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-56 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-90 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
                         <div class="py-1">
                             <div class="px-4 py-2">
                                 <p class="text-sm font-semibold text-gray-900">{{user.name}}</p>
                                 <p class="text-sm text-gray-500 truncate">{{user.email}}</p>
-                                <p class="text-sm text-gray-500 truncate">Authify ID: {{authifyID}}</p>
+                                <p class="text-sm font-semibold text-gray-500 truncate">Authify ID: {{authifyID}}</p>
+                                <hr class="my-1">
+                                <p class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Allow others to find your ID on other social medias <input type="checkbox"></p>
+                                
+
+
                             </div>
                             <hr class="my-1">
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Account Settings</a>

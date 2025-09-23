@@ -111,7 +111,7 @@
             </svg>
         </div>
         <h2 id="success-title" class="text-2xl font-bold text-slate-800 mt-5">Upload Successful!</h2>
-        <p id="success-message" class="text-slate-500 mt-2">Your document has been uploaded.</p>
+        <p id="success-message" class="text-slate-500 mt-2">Your document has been verified.</p>
         <button onclick="window.location.href = '/'" id="reset-button" class="mt-8 w-full py-3 px-4 rounded-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Go to HOME
         </button>
@@ -238,8 +238,8 @@
         uploadCard.classList.add('hidden');
         successCard.classList.remove('hidden');
         
-        successTitle.textContent = `${docType} Uploaded!`;
-        successMessage.textContent = `Your file "${selectedFile.name}" has been successfully submitted for verification.`;
+        successTitle.textContent = `${docType} verified!`;
+        successMessage.textContent = `Your file "${selectedFile.name}" has been successfully verified!`;
     };
 
 </script>
