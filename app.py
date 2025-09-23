@@ -1,6 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, session
 from authlib.integrations.flask_client import OAuth
 import random
+import os
+from dotenv import load_dotenv, dotenv_values 
+load_dotenv() 
 
 app = Flask(__name__)
 app.secret_key = 'supersecret123'
@@ -11,7 +14,7 @@ oauth = OAuth(app)
 google = oauth.register(
     name="google",
     client_id="652923225802-u1cr7qet7i6ckjrsjfv509fbbq7hi4fj.apps.googleusercontent.com",
-    client_secret="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",
+    client_secret= os.getenv("client_secret"),
     server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
     client_kwargs={"scope": "openid email profile"},
     api_base_url='https://openidconnect.googleapis.com/v1/',
